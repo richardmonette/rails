@@ -5,6 +5,8 @@ require "active_support/core_ext/kernel/singleton_class"
 require "active_support/core_ext/module/redefine_method"
 require "active_support/multibyte/unicode"
 
+require 'byebug'
+
 class ERB
   module Util
     HTML_ESCAPE = { "&" => "&amp;",  ">" => "&gt;",   "<" => "&lt;", '"' => "&quot;", "'" => "&#39;" }
@@ -199,8 +201,8 @@ module ActiveSupport #:nodoc:
       super(html_escape_interpolated_argument(value))
     end
 
-    def []=(index, value)
-      super(index, html_escape_interpolated_argument(value))
+    def []=(index, value, *args)
+      super(index, html_escape_interpolated_argument(value), *args)
     end
 
     def +(other)

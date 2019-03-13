@@ -13,6 +13,14 @@ class SafeBufferTest < ActiveSupport::TestCase
     assert_equal "Foo", "foo".html_safe.titleize
   end
 
+  test 'can assign value into slice' do
+    buffer = ActiveSupport::SafeBuffer.new('hello')
+
+    buffer[0, 3] = 'a'
+
+    assert_equal 'alo', buffer
+  end
+
   test "Should look like a string" do
     assert @buffer.is_a?(String)
     assert_equal "", @buffer
